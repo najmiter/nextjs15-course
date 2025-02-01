@@ -1,5 +1,11 @@
+import Card from '@/components/card';
+
 export default function page() {
-  return <>Contact page</>;
+  return (
+    <>
+      <Card />
+    </>
+  );
 }
 
 // app => /contact
