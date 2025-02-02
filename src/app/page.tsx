@@ -6,7 +6,6 @@ export default function Home() {
       <h1>Home page</h1>
       <div className="grid gap-2">
         <Link href="/store">Store page</Link>
-        <Link href="/store/product">Product page</Link>
       </div>
     </main>
   );

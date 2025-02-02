@@ -11,7 +11,6 @@ import Card from '@/components/card';
 export default function StorePage() {
   return (
     <main className="text-7xl">
-      <Card />
       <button>Some button</button>
     </main>
   );
