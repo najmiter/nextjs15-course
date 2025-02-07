@@ -2,10 +2,15 @@
 
 import { useRouter } from 'next/navigation';
 import { HeroUIProvider } from '@heroui/react';
+import { SessionProvider } from 'next-auth/react';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import { Session } from 'next-auth';
 
-export default function MainProvider({ children }: PropsWithChildren) {
+export default function MainProvider({
+  session,
+  children,
+}: PropsWithChildren<{ session: Session | null }>) {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
 
@@ -22,7 +27,7 @@ export default function MainProvider({ children }: PropsWithChildren) {
         forcedTheme="light"
         defaultTheme="light"
       >
-        {children}
+        <SessionProvider session={session}>{children}</SessionProvider>
       </NextThemesProvider>
     </HeroUIProvider>
   );

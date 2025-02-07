@@ -1,30 +1,28 @@
-import { db } from '@/utils/db';
-import Link from 'next/link';
+'use client';
 
-export default async function Home() {
-  // const products = await db.product.createManyAndReturn({
-  //   data: [
-  //     { name: 'Product 1', price: 100 },
-  //     { name: 'Product 2', price: 200 },
-  //   ],
-  // });
+// import { auth } from '@/utils/auth';
+import { Button } from '@heroui/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 
-  const res = await fetch('http://localhost:3000/api/get-user', {
-    method: 'POST',
-    body: JSON.stringify({
-      id: Date.now(),
-      data: 'DEFAULT DATA',
-    }),
-  });
+export default /* async */ function Home() {
+  // const session =await auth();
+  const { data, update } = useSession();
 
-  const data = await res.json();
+  // useEffect(() => {
+  //   update({ productCount: 10 });
+  // }, []);
 
   return (
     <main className="text-2xl">
       <h1>Home page</h1>
+
       <div className="grid gap-2">
-        {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
-        {/* <pre>{JSON.stringify(products, null, 2)}</pre> */}
+        {!data?.user && (
+          <Button onPress={() => signIn('google')}>Sign in with google</Button>
+        )}
+        {!!data?.user && <Button onPress={() => signOut()}>Sign out</Button>}
+        <pre>{JSON.stringify(data, null, 2)}</pre>
       </div>
     </main>
   );
