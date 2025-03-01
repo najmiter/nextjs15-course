@@ -9,11 +9,6 @@ export default async function middleware(req: NextRequest) {
   //   return NextResponse.redirect(new URL('/signin', req.nextUrl.origin));
   // }
 
-  console.log('Middleware called', req.nextUrl.pathname);
-
-  if (req.nextUrl.pathname === '/dashboard')
-    return NextResponse.redirect(new URL('/signin', req.nextUrl.origin));
-
   return NextResponse.next();
 }
 

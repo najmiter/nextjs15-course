@@ -22,6 +22,7 @@ export const {
   },
   callbacks: {
     async jwt({ token, user, trigger, session }) {
+      token.role = 'admin';
       if (trigger === 'update') {
         token.productCount = session.productCount;
       }
@@ -39,6 +40,7 @@ export const {
       if (token?.productCount !== undefined) {
         session.user.productCount = token.productCount as number;
       }
+      session.user.role = token.role as 'admin';
       if (user) {
         session.user.id = user.id;
       }
